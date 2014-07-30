@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+          "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<!-- 测试环境 -->
+		<!--  
+		 <property name="hibernate.connection.url">jdbc:postgresql://127.0.0.1:5432/ezipcc_cn</property> 
+		 <property name="hibernate.connection.username">ezipccadmin</property>
+		 <property name="hibernate.connection.password">EZIPCC@eS00N</property>
+		-->
+		
+		<!-- 本机环境 	-->
+		<property name="hibernate.connection.url">jdbc:postgresql://192.168.3.17:5432/xybc0628</property>
+		<property name="hibernate.connection.username">postgres</property>
+		<property name="hibernate.connection.password">EZIPCC@eS00N</property>
+		
+		
+		<property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+		<property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+	
+		
+		<!-- 本机Mysql环境
+		<property name="hibernate.connection.url">jdbc:mysql://127.0.0.1:3306/xybc0715</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.connection.password">root</property>
+		
+		
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		 -->
+		
+		
+		<property name="hibernate.connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider</property>
+		<!-- 连接池的最小连接数 Initial number of database connections -->
+		<property name="c3p0.min_size">2</property>
+		<!-- 连接池的最大连接数 Maximum number of database connections to open -->
+		<property name="c3p0.max_size">5</property>
+		<!--设定空闲时间后,连接池自动回收 以秒计算 Maximum idle time for a connection-->
+		<property name="c3p0.time_out">1800</property>
+		<!-- Maximum size of c3p0 statement cache  -->
+		<property name="c3p0.max_statement">50</property>
+		<!--当连接池中的连接耗尽的时候c3p0一次同时获取的连接数。 -->
+		<property name="c3p0.acquire_increment">2</property>
+		<!-- Idle time before a c3p0 pooled connection is validated 以秒计算 -->
+		<property name="c3p0.idle_test_period">120</property>
+		<!-- Validate the connection on checkout  -->
+		<property name="c3p0.validate">false</property>
+		<!--是否将运行期生成的SQL输出到日志以供调试-->
+		<property name="show_sql">false</property>
+	</session-factory>
+</hibernate-configuration>
