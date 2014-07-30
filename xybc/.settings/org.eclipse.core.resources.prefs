@@ -1,5 +1,6 @@
 eclipse.preferences.version=1
 encoding//src/com/blisscloud/hibernate/HibernateDao.java=UTF-8
+encoding//src/com/blisscloud/util/DmManager.java=UTF-8
 encoding//src/com/blisscloud/util/EZDbUtil.java=gbk
 encoding//src/com/blisscloud/util/EZSimpleDataPageBean.java=UTF-8
 encoding//src/com/blisscloud/util/StringUtil.java=UTF-8

@@ -44,23 +44,58 @@
 	    }
 	    /*set EZIPCC Customer info*/
 	    function setEZIPCCCustomer(lid,
-	    						   IPCCCustomerINFO,
-	    						   sex,
+	    						   username,
+	    						   ntitle,age,
 	    						   officePhone,
 		                           homePhone,
-		                           mobilePhone,city)
+		                           mobilePhone,city,idnumber)
 	    {
 			if(confirm("确定要选择该客户吗?"))
 			{
 				//alert("lid--->"+lid+"---IPCCCustomerINFO---"+IPCCCustomerINFO);
 				this.opener.form1.customerID.value = lid;
-				this.opener.form1.IPCCCustomerINFO.value = IPCCCustomerINFO;
-				this.opener.form1.IPCCCustomerSEX.value = sex;
+				this.opener.form1.IPCCCustomerINFO.value = username;
+				this.opener.form1.IPCCCustomerSEX.value = ntitle;
 				this.opener.form1.IPCCCompTel.value = officePhone;
 				this.opener.form1.IPCCHomeTel.value = homePhone;
 				this.opener.form1.IPCCMobileTel.value = mobilePhone;
 				this.opener.form1.area.value = city;
+				this.opener.form1.age.value = age;
+				this.opener.form1.IDNumber.value = idnumber;
 				window.close();
+			}
+		}
+		
+		 setTimeout(function() {
+	// IE
+	if(document.all) {
+		document.getElementById("clickMe").click();
+	}
+	// 其它浏览器
+	else {
+		var e = document.createEvent("MouseEvents");
+		e.initEvent("click", true, true);
+		document.getElementById("clickMe").dispatchEvent(e);
+	}
+}, 500);
+		
+		function load(lid,
+	    						   username,
+	    						   ntitle,age,
+	    						   officePhone,
+		                           homePhone,
+		                           mobilePhone,city,idnumber)
+		{
+			if(this.opener.form1.IPCCCustomerINFO.value != "")
+			{	
+				this.opener.form1.IPCCCustomerINFO.value = username;
+				this.opener.form1.IPCCCustomerSEX.value = ntitle;
+				this.opener.form1.IPCCCompTel.value = officePhone;
+				this.opener.form1.IPCCHomeTel.value = homePhone;
+				this.opener.form1.IPCCMobileTel.value = mobilePhone;
+				this.opener.form1.area.value = city;
+				this.opener.form1.age.value = age;
+				this.opener.form1.IDNumber.value = idnumber;
 			}
 		}
 		</script>
@@ -84,7 +119,7 @@
 		String flag				= request.getParameter("flag");
 		//2、根据查询条件得到个人客户信息列表; 
 		String sql="select lid, strid, strname, nsex,"+ 
-   						   "strcorporation,strmobilephone, strofficephone, strhomephone,stremail,ntitle,strcity1 "+
+   						   "strcorporation,strmobilephone, strofficephone, strhomephone,stremail,ntitle,strcity1,age,idnumber "+
    					   "from tb000000personalcustomer "+
 					   "where nstate='1'  ";
 		//姓名 对应EZIPCC字段strname
@@ -128,9 +163,11 @@
    		pageBean.setPicPath(picPath);
    		pageBean.setEachPageRowLimit(10);
    		pageBean.setFooter();    
+   		
+   		
 		%>
 	
-	<body topmargin="0" style="overflow: hidden;"> 
+	<body topmargin="0" style="overflow: hidden;" > 
 		<form  name="form1"  method="post" action="customer_select.jsp">
 		<input name="curpage" type="hidden" value="<%=curpage%>"/>
 		<input name="customerID" type="hidden" value="<%=customerID%>"/>
@@ -172,7 +209,7 @@
 		<div id="dataTable">
 		<table  width="100%" border="0" cellspacing="0" cellpadding="0" id="theObjTable" style="table-layout:fixed;">
 		  <tbody id="dataArea">
-			<%
+			 <%
 			 if(list!=null)
 				{
 					for(int i=0;i<list.size();i++){
@@ -180,8 +217,10 @@
 					if(s!=null)
 					{
 						String lid 	 		=	String.valueOf(s[0]);		//lid
+						
 						String strid 		=	String.valueOf(s[1]);		//strid
 						String username	 	=  	String.valueOf(s[2]);		//姓名
+						//System.out.print(username);
 						String sex		 	=  	String.valueOf(s[3]);		//性别
 						String campany0  	=	String.valueOf(s[4]);		//单位名
 						String mobilePhone 	=	String.valueOf(s[5]);		//手机
@@ -190,6 +229,9 @@
 						String email0	  	=	String.valueOf(s[8]);		//电子邮件
 						String ntitle	  	=	String.valueOf(s[9]);		//称谓
 						String city	  	=	String.valueOf(s[10]);		//城市
+						String age = String.valueOf(s[11]);
+						String idnumber = String.valueOf(s[12]);
+						
 						
 						if(StringUtil.isNullOrEmpty(strid))strid="";
 						if(StringUtil.isNullOrEmpty(username))username="";
@@ -206,28 +248,47 @@
 						if("2".equals(ntitle)){ntitle="小姐";}
 						if("3".equals(ntitle)){ntitle="女士";}
 						if(StringUtil.isNullOrEmpty(city))city="";
-				%>
-					<TR>
-						<td align="center" nowrap="nowrap">
+						if(StringUtil.isNullOrEmpty(age))age="";
+						if(StringUtil.isNullOrEmpty(idnumber))idnumber="";
+				%>  
+					<TR >
+					<tbody onload="load();"></tbody>
+						<td align="center" nowrap="nowrap" id="0">
 							<input name="myCheckCustomer" type="radio" value="<%=lid%>" 
 								   onclick="setEZIPCCCustomer('<%=lid%>',
 								                              '<%=username%>',
 								                              '<%=ntitle%>',
+								                              '<%=age%>',
 								                              '<%=officePhone%>',
 								                              '<%=homePhone%>',
 								                              '<%=mobilePhone%>',
-								                              '<%=city%>');"
+								                              '<%=city%>',								                          
+								                              '<%=idnumber%>' 
+								                              );"
 								  <%if(lid.equals(customerID)){out.println("checked=\"checked\"");} %>> 
+								  <a id="clickMe" onclick="load('<%=lid%>',
+								                              '<%=username%>',
+								                              '<%=ntitle%>',
+								                              '<%=age%>',
+								                              '<%=officePhone%>',
+								                              '<%=homePhone%>',
+								                              '<%=mobilePhone%>',
+								                              '<%=city%>',								                          
+								                              '<%=idnumber%>' );"></a>
 				        </td>
+				        
 						<td nowrap="nowrap"><%=username%></td>
 						<td nowrap="nowrap" align="center"><%=sex%></td>
 						<td nowrap="nowrap"><%=campany0%></td>
-						<td nowrap="nowrap"><%=mobilePhone%></td>
-						<td nowrap="nowrap"><%=officePhone%></td>
-						<td nowrap="nowrap"><%=homePhone%></td>
-						<td nowrap="nowrap"><%=email0%></td>
+						<td nowrap="nowrap" id="4"><%=mobilePhone%></td>
+						<td nowrap="nowrap" id="2"><%=officePhone%></td>
+						<td nowrap="nowrap" id="3"><%=homePhone%></td>
+						<td nowrap="nowrap" id="3"><%=email0%></td>
+						<td nowrap="nowrap"><%=age%></td>
+						<td nowrap="nowrap"><%=idnumber%></td>
 					</tr>
 					<%}}}%>
+					
 		</tbody>
 	 </table>
 	 </div>
@@ -256,7 +317,9 @@
 		["手机",80],
 		["工作电话",80],
 		["家庭电话",100],	
-		["电子邮件",]
+		["电子邮件",100],
+		["年龄",100],
+		["身份证号",]
 		];
 		initGrid(fields,"<%=rootPath%>/css/EvanGrid.css","<%=rootPath%>/images/evanGrid");
 </script>

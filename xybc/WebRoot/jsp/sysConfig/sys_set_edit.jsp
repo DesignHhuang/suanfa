@@ -53,7 +53,7 @@
 			}
 			
 		%>
-		<script language="javascript" type="text/javascript">
+		<script type="text/javascript">
 		function doit() {
 		      var param_name=form1.param_name.value;
 		      var cn_name=form1.cn_name.value;

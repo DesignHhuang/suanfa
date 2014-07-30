@@ -6,7 +6,7 @@
 %>
 <html>
 	<head>
-		<title>工单产品列表</title>
+		<title>工单产品视图</title>
 		<link href="<%=rootPath%>/css/chrome.css" rel="stylesheet" type="text/css">
 		<script src="<%=rootPath%>/script/EvanGrid.js"></script>
 		<script src="<%=rootPath%>/script/DateTime.js" language="JavaScript" type="text/javascript"></script>
@@ -163,7 +163,7 @@
 				&& !"-1".equals(billID)
 		   )
   		{
-  			buffer.append(" and bp.billid='"+billID+"' ");  
+  			buffer.append(" and bp.billid='"+billID+"' or bp.billid='1' ");  
   		}
   	 	buffer.append(" order by lid desc"); 
    		sql=buffer.toString();

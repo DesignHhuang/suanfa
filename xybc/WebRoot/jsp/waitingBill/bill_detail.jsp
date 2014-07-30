@@ -28,6 +28,7 @@
 	String dealState	  	 = request.getParameter("dealState");	//dealState---处理状态
 	String eventNo		  	 = request.getParameter("eventNo");		//eventNo---事件编号
 	String receiveMethod 	 = request.getParameter("receiveMethod");//receiveMethod---接收方式
+	String localarea         = request.getParameter("localarea");
 	String eventFrom		 = request.getParameter("eventFrom");	 //eventFrom---来源
 	String callType		  	 = request.getParameter("callType");	 //callType---呼叫类型
 	String contactName	 	 = request.getParameter("contactName");	 //contactName---联系人姓名
@@ -93,6 +94,7 @@
 	if(StringUtil.isNullOrEmpty(dealState))dealState = "";
 	if(StringUtil.isNullOrEmpty(eventNo))eventNo = "";
 	if(StringUtil.isNullOrEmpty(receiveMethod))receiveMethod = "";
+	if(StringUtil.isNullOrEmpty(localarea))localarea = "";
 	if(StringUtil.isNullOrEmpty(contactName))contactName = "";
 	if(StringUtil.isNullOrEmpty(contactTel))contactTel = "";
 	if(StringUtil.isNullOrEmpty(backupContactName))backupContactName = "";
@@ -162,6 +164,7 @@
 														"DEALSTATE           ,"+
 														"EVENTNO             ,"+
 														"RECEIVEMETHOD       ,"+
+														"LOCALAREA       ,"+
 														"EVENTFROM           ,"+
 														"CALLTYPE            ,"+
 														"CONTACTNAME         ,"+
@@ -235,6 +238,7 @@
 											"'"+dealState	  	      +"',"+
 											"'"+eventNo		  	      +"',"+
 											"'"+receiveMethod 	      +"',"+
+											"'"+localarea 	      +"',"+
 											"'"+eventFrom		      +"',"+
 											"'"+callType		  	  +"',"+
 											"'"+contactName	 	      +"',"+
@@ -323,7 +327,8 @@
 									"ENDTIME             =to_timestamp('"+endTime+"','yyyy-mm-dd hh24:mi:ss')::timestamp without time zone,"+
 									"EVENTTYPE           ='"+eventType			   +"',"+
 									"DEALSTATE           ='"+dealState			   +"',"+                     																																																																																																																									
-									"RECEIVEMETHOD       ='"+receiveMethod 		   +"',"+                     																																																																																																																									
+									"RECEIVEMETHOD       ='"+receiveMethod 		   +"',"+    
+									"LOCALAREA       ='"+localarea 		   +"',"+                    																																																																																																																									
 									"EVENTFROM           ='"+eventFrom			   +"',"+                     																																																																																																		
 									"CALLTYPE            ='"+callType			   +"',"+                     																																																																																																		
 									"CONTACTNAME         ='"+contactName	 	   +"',"+                     																																																																																																																											
@@ -397,6 +402,7 @@
 								"DEALSTATE           ,"+   
 								"EVENTNO             ,"+   
 								"RECEIVEMETHOD       ,"+   
+								"LOCALAREA       ,"+  
 								"EVENTFROM           ,"+   
 								"CALLTYPE            ,"+   
 								"CONTACTNAME         ,"+   
@@ -508,6 +514,7 @@
 				isAuthorization		=	String.valueOf(s[51]);
 				billMemo     		=	String.valueOf(s[52]);
 				backupPersonMemo	=	String.valueOf(s[53]);
+				localarea   = String.valueOf(s[54]);
 				
 				//filter data
 				if(StringUtil.isNullOrEmpty(agentID))agentID = "10000";
@@ -516,6 +523,7 @@
 				if(StringUtil.isNullOrEmpty(dealState))dealState = "";
 				if(StringUtil.isNullOrEmpty(eventNo))eventNo = "";
 				if(StringUtil.isNullOrEmpty(receiveMethod))receiveMethod = "";
+				if(StringUtil.isNullOrEmpty(localarea))localarea = "";
 				if(StringUtil.isNullOrEmpty(contactName))contactName = "";
 				if(StringUtil.isNullOrEmpty(contactTel))contactTel = "";
 				if(StringUtil.isNullOrEmpty(backupContactName))backupContactName = "";
@@ -589,6 +597,7 @@
 								"DEALSTATE           ,"+   
 								"EVENTNO             ,"+   
 								"RECEIVEMETHOD       ,"+   
+								"LOCALAREA       ,"+ 
 								"EVENTFROM           ,"+   
 								"CALLTYPE            ,"+   
 								"CONTACTNAME         ,"+   
@@ -700,6 +709,7 @@
 				isAuthorization		=	String.valueOf(s[51]);
 				billMemo     		=	String.valueOf(s[52]);
 				backupPersonMemo	=	String.valueOf(s[53]);
+				localarea = String.valueOf(s[54]);
 				//filter data
 				if(StringUtil.isNullOrEmpty(agentID))agentID = "10000";
 				if(StringUtil.isNullOrEmpty(receiveTime))receiveTime = "";
@@ -707,6 +717,7 @@
 				if(StringUtil.isNullOrEmpty(dealState))dealState = "";
 				if(StringUtil.isNullOrEmpty(eventNo))eventNo = "";
 				if(StringUtil.isNullOrEmpty(receiveMethod))receiveMethod = "";
+				if(StringUtil.isNullOrEmpty(localarea))localarea = "";
 				if(StringUtil.isNullOrEmpty(contactName))contactName = "";
 				if(StringUtil.isNullOrEmpty(contactTel))contactTel = "";
 				if(StringUtil.isNullOrEmpty(backupContactName))backupContactName = "";
@@ -757,11 +768,12 @@
 		okButDisplay = "disabled=\"disabled\"";
 	}
 	
+	//String IPCCCustomerINFO = "";    //name
 	String IPCCCustomerSEX = "";	//消费者性别
 	String IPCCCompTel   = "";		//消费者公司电话
 	String IPCCHomeTel   = "";		//消费者办公电话
 	String IPCCMobileTel = "";		//消费者移动电话
-	if(!StringUtil.isNullOrEmpty(customerID) && !"-1".equals(customerID))
+	if(!StringUtil.isNullOrEmpty(customerID)  && !"-1".equals(customerID))
 	{
 		String myCustomerSQL = "select ntitle,strofficephone,strhomephone,strmobilephone "+
 							   "from tb000000personalcustomer where lid="+customerID;
@@ -771,6 +783,7 @@
 			Object[] s =(Object[])cusList.get(0);
 			if(s!=null)
 			{
+				//IPCCCustomerINFO        =   String.valueOf(s[0]);
 				IPCCCustomerSEX			=	String.valueOf(s[0]);
 				IPCCCompTel				=	String.valueOf(s[1]);
 				IPCCHomeTel				=	String.valueOf(s[2]);
@@ -794,7 +807,7 @@
 			}
 		}
 		
-		 	
+		 
 	}
 %>
 <html>
@@ -812,6 +825,7 @@
 			if(dataCheck())
 			{
 				document.form1.submit();
+				window.alert("保存成功！");
 		        //window.close();
 			}
 		}
@@ -947,6 +961,9 @@
 					                      ",left="+x+",top="+y+
 					                      ",scrollbars=yes,menubar=no,statusbar=no,");
 		}
+		
+	
+		
 		/*Ajax get summaryPath*/
 		var xmlhttp;
 		function ajaxGetSummaryPath(summaryId)
@@ -1050,14 +1067,25 @@
 			 
 			 
 			 function closeBill(){
-			 	if(confirm("您确定要关闭工单吗?"))
+			 	if(confirm("确认已经保存？未保存请先保存再关闭！"))
 				{
 					window.close();
 			    }
+			    else
+			    {
+			    	window.back();
+			    }
+			 }
+			 
+			 function load()
+			 {
+			 	var mySelProductID = parent.frames["productSelectFrame"].getSelProductID();
+				form1.productID.value = mySelProductID;
+				form1.submit();
 			 }
 		</script>
 </head>
-<body style="overflow: auto;" topmargin="0" leftmargin="0" rightmargin="0">
+<body style="overflow: auto;" topmargin="0" leftmargin="0" rightmargin="0" onload="load()">
 	<form name="form1" method="post" action="bill_detail.jsp">
 	<input name="optType" type="hidden" value="<%=optType%>"/>
 	<input name="optID" type="hidden" value="<%=optID%>"/>
@@ -1229,6 +1257,19 @@
 		</td>
 		<td align="right" nowrap="nowrap">预约时间:</td>
 		<td><input name="reserveTime" type="text" class="box01" value="<%=reserveTime%>" onFocus="ShowCalendar(0)" <%=myTextSize%>></td>
+		 <td align="right" nowrap="nowrap">所在地区:</td>
+		<td>
+			<select name="localarea" id="localarea">
+			  <%
+            	String localareaSQL =  "SELECT typevalue, typename "+
+					            	   "FROM tb_ips_dictionary "+
+					            	   "WHERE maintype='localarea' and isuse='1' "+
+					            	   "ORDER BY ordernum";   
+            	String  localareaOptions=EZDmManager.getOptionsBySql(localareaSQL,localarea);
+          		out.println(localareaOptions);
+              %>
+			</select> 
+		</td>
 	    <td align="right" nowrap="nowrap" colspan="3">愿意接受电话访问:</td>
 		<td colspan="4">
 		  	<input type="radio" name="canRecieveTel" value="1" <%if("1".equals(canRecieveTel)){out.print("checked=\"checked\"");}%>>是
@@ -1342,7 +1383,7 @@
 		  <!-- 产品信息列表 -->
 		  <tr>
 		  	<td colspan="10" width="100%">
-		  		<iframe width="100%" height="100%" src="../product/bill_product_list.jsp?billID=<%=eventNo%>" 
+		  		<iframe width="100%" height="120%" src="../product/bill_product_list.jsp?billID=<%=eventNo%>" 
 						    name="jetonBillProductFrame" scrolling="no" id="jetonBillProductFrame"
 							frameborder="0" border="0" framespacing="0">
 				</iframe>
@@ -1366,6 +1407,7 @@
 			<td>
 				<input type="radio" name="isAuthorization" value="1" <%if("1".equals(isAuthorization)){out.print("checked=\"checked\"");}%>>是
 				<input type="radio" name="isAuthorization" value="2" <%if("2".equals(isAuthorization)){out.print("checked=\"checked\"");}%>>否
+				<input type="radio" name="isAuthorization" value="3" <%if("3".equals(isAuthorization)){out.print("checked=\"checked\"");}%>>不确定 
 			</td>
 			<td align="right" nowrap="nowrap">客户名称:</td>
 			<td><input name="customerName" type="text" class="box01" value="<%=customerName%>" size="20"></td>

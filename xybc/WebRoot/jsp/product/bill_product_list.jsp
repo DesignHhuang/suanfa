@@ -30,7 +30,11 @@
 	</head>
 	<%
 		String billID	  = request.getParameter("billID");		 //¹¤µ¥ID
-		if(StringUtil.isNullOrEmpty(billID))billID="-1";
+		
+		if(StringUtil.isNullOrEmpty(billID))
+		{
+			billID="-1";
+		}
 		String curpage	  = request.getParameter("curpage");
 		
 		String sql = "";
@@ -49,11 +53,13 @@
 		buffer.append("left join TB_IPS_BILL_PRODUCT bp on p.lid=bp.productid ");
 		buffer.append("WHERE 1=1 ");
   		//productID
+  		//System.out.print(billID);
 		if(!StringUtil.isNullOrEmpty(billID)
 				&& !"-1".equals(billID)
 		   )
   		{
-  			buffer.append(" and bp.billid='"+billID+"' ");  
+  			
+  			buffer.append(" and bp.billid='"+billID+"' or bp.billid='1' ");  
   		}
   	 	buffer.append(" order by lid desc"); 
    		sql=buffer.toString();
@@ -116,6 +122,7 @@
 							<td nowrap="nowrap"><%=strmanufacturer%></td>
 						</tr>
 						<%}}}%>
+							
 			</tbody>
 		 </table>
 		 </div>

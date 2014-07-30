@@ -11,7 +11,7 @@ import com.blisscloud.hibernate.HibernateUtil;
 
 /**
  * <p>
- * Title:����ֵ���?��
+ * Title:锟斤拷锟斤拷值锟斤拷锟�锟斤拷
  * </p>
  * <p>
  * Description:
@@ -58,8 +58,8 @@ public class DmManager {
 	}
 
 	/**
-	 * ȡ������ѡ���Options�б� sql:select call_code,call_name from dm_call order
-	 * by call_order ֻ�������ֶ�
+	 * 取锟斤拷锟斤拷锟斤拷选锟斤拷锟絆ptions锟叫憋拷 sql:select call_code,call_name from dm_call order
+	 * by call_order 只锟斤拷锟斤拷锟斤拷锟街讹拷
 	 * 
 	 * @return
 	 */
@@ -68,7 +68,7 @@ public class DmManager {
 	}
 
 	/**
-	 * ���ĳ��ѡ��key��selectedOption String
+	 * 锟斤拷锟侥筹拷锟窖★拷锟絢ey锟斤拷selectedOption String
 	 * 
 	 * @param typeKey
 	 * @param selectKey
@@ -96,7 +96,7 @@ public class DmManager {
 	}
 
 	/**
-	 * ���ĳ��ѡ��key��selectedOption String
+	 * 锟斤拷锟侥筹拷锟窖★拷锟絢ey锟斤拷selectedOption String
 	 * 
 	 * @param typeKey
 	 * @param selectKey
@@ -121,7 +121,7 @@ public class DmManager {
 	}
 
 	/**
-	 * ���ĳ��ѡ��key��selectedOption String
+	 * 锟斤拷锟侥筹拷锟窖★拷锟絢ey锟斤拷selectedOption String
 	 * 
 	 * @param typeKey
 	 * @param selectKey
@@ -146,7 +146,7 @@ public class DmManager {
 	}
 
 	/**
-	 * ȡ�û�������Options
+	 * 取锟矫伙拷锟斤拷锟斤拷锟斤拷Options
 	 * 
 	 * @return
 	 */
@@ -155,7 +155,7 @@ public class DmManager {
 	}
 
 	/**
-	 * ȡ�û�������Options
+	 * 取锟矫伙拷锟斤拷锟斤拷锟斤拷Options
 	 * 
 	 * @return
 	 */
@@ -166,7 +166,7 @@ public class DmManager {
 	}
 
 	/**
-	 * ȡ��ĳ�������ڵĵ����µ���Ա�б�
+	 * 取锟斤拷某锟斤拷锟斤拷锟斤拷锟节的碉拷锟斤拷锟铰碉拷锟斤拷员锟叫憋拷
 	 * 
 	 * @param local_no
 	 * @param selUser
@@ -182,13 +182,13 @@ public class DmManager {
 	}
 
 	/**
-	 * ȡ��ĳ�������ڵĵ����µ���Ա�б�(������ģ��)
+	 * 取锟斤拷某锟斤拷锟斤拷锟斤拷锟节的碉拷锟斤拷锟铰碉拷锟斤拷员锟叫憋拷(锟斤拷锟斤拷锟斤拷模锟斤拷)
 	 * 
 	 * @param selUser
 	 * @return
 	 */
-	public static String getUserListener(String localNo, String selUser) {
-
+	public static String getUserListener(String localNo, String selUser) 
+	{
 		if (selUser != null)
 			selUser = selUser.trim();
 		String sql = "";
@@ -202,7 +202,7 @@ public class DmManager {
 	}
 
 	/**
-	 * ȡ�õ���Options
+	 * 取锟矫碉拷锟斤拷Options
 	 * 
 	 * @return
 	 */
@@ -211,7 +211,7 @@ public class DmManager {
 	}
 
 	/**
-	 * ȡ�ò�������Options
+	 * 取锟矫诧拷锟斤拷锟斤拷锟斤拷Options
 	 */
 	public static String getDepartmentOptions(String selDept) {
 		String PRODUCT_DB_USER = SysParaUtil.PRODUCT_DB_USER;
@@ -221,7 +221,7 @@ public class DmManager {
 	}
 
 	/**
-	 * ȡ�û�������Options
+	 * 取锟矫伙拷锟斤拷锟斤拷锟斤拷Options
 	 * 
 	 * @return
 	 */
@@ -230,7 +230,7 @@ public class DmManager {
 	}
 
 	/**
-	 * ȡ�û�������Options
+	 * 取锟矫伙拷锟斤拷锟斤拷锟斤拷Options
 	 * 
 	 * @return
 	 */
@@ -240,7 +240,7 @@ public class DmManager {
 	}
 
 	/**
-	 * ȡ��ĳ�������µ�ҵ������Options
+	 * 取锟斤拷某锟斤拷锟斤拷锟斤拷锟铰碉拷业锟斤拷锟斤拷锟斤拷Options
 	 * 
 	 * @return
 	 */
@@ -257,7 +257,7 @@ public class DmManager {
 	}
 
 	/**
-	 * ȡ�û�������Options
+	 * 取锟矫伙拷锟斤拷锟斤拷锟斤拷Options
 	 * 
 	 * @return
 	 */
@@ -266,8 +266,8 @@ public class DmManager {
 	}
 
 	/**
-	 * ȡ������ѡ���Options�б� sql:select call_code,call_name from dm_call order
-	 * by call_order ֻ�������ֶ�
+	 * 取锟斤拷锟斤拷锟斤拷选锟斤拷锟絆ptions锟叫憋拷 sql:select call_code,call_name from dm_call order
+	 * by call_order 只锟斤拷锟斤拷锟斤拷锟街讹拷
 	 * 
 	 * @return
 	 */
@@ -307,7 +307,7 @@ public class DmManager {
 	}
 
 	/**
-	 * ȡ������ֵ���ձ�
+	 * 取锟斤拷锟斤拷锟斤拷值锟斤拷锟秸憋拷
 	 * 
 	 * @param sql
 	 * @return
@@ -317,7 +317,7 @@ public class DmManager {
 	}
 
 	/**
-	 * ȡ������ֵ���ձ�
+	 * 取锟斤拷锟斤拷锟斤拷值锟斤拷锟秸憋拷
 	 * 
 	 * @param sql
 	 * @return
@@ -329,7 +329,7 @@ public class DmManager {
 	}
 
 	/**
-	 * ȡ������ֵ���ձ�
+	 * 取锟斤拷锟斤拷锟斤拷值锟斤拷锟秸憋拷
 	 * 
 	 * @param sql
 	 * @return
@@ -387,7 +387,7 @@ public class DmManager {
 	}
 
 	/**
-	 * ��ݻ���ҵ����С��
+	 * 锟斤拷莼锟斤拷锟揭碉拷锟斤拷锟叫★拷锟�
 	 * 
 	 * @param call_type
 	 * @param biz_type

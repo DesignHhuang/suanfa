@@ -292,7 +292,7 @@
 						</td>
 					  </tr>
 					  <tr >
-					  	<td colspan="6" align="right" nowrap="nowrap" height="30px">
+					  	<td colspan="6" align="left" nowrap="nowrap" height="30px">
 							 
 							<input value="ÐÂÔö" type="button" style="width:40px;" onclick="addNewBill();" class="button">
 
